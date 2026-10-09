@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Навчальний портал{% endblock %}</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:16px Arial;background:#f3f5fa;color:#202943}
+nav{background:#202943;padding:18px 6%;display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none}main{max-width:1000px;margin:35px auto;padding:25px;background:white;border-radius:14px}
+h1,h2{color:#354b86}input,select,button{display:block;width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ccd2df;border-radius:7px}
+button,.btn{background:#405bc0;color:white;border:0;padding:12px 18px;border-radius:7px;text-decoration:none;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin:15px 0}td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+.errorlist{color:#b42318}.muted{color:#667085}
+</style>
+</head>
+<body>
+<nav><a href="/">Головна</a><a href="/dashboard/">Мій кабінет</a><a href="/admin/">Адміністрування</a>
+{% if user.is_authenticated %}
+<form action="/logout/" method="post" style="margin:0">{% csrf_token %}<button style="margin:0">Вийти</button></form>
+{% else %}<a href="/login/">Увійти</a><a href="/register/">Реєстрація</a>{% endif %}
+</nav>
+<main>{% block content %}{% endblock %}</main>
+</body></html>

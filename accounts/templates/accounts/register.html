@@ -1,0 +1,13 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Реєстрація{% endblock %}
+{% block content %}
+<h1>Реєстрація</h1>
+<form method="post">{% csrf_token %}
+<label>Ім'я</label><input name="name" required>
+<label>Прізвище</label><input name="lastname" required>
+<label>Електронна пошта (необов'язково)</label><input type="email" name="email">
+{{ form.as_p }}
+<button type="submit">Зареєструватися</button>
+</form>
+<p class="muted">Після реєстрації адміністратор зможе додати профіль до групи студента або викладача.</p>
+{% endblock %}

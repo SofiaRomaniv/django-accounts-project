@@ -1,0 +1,22 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Мій кабінет{% endblock %}
+{% block content %}
+<h1>Мій кабінет</h1>
+<p>Вітаємо, {{ user.username }}!</p>
+{% if profile %}<p>Профіль: {{ profile.name }} {{ profile.lastname }}</p>{% endif %}
+{% if student %}<p>Група: {{ student.group|default:"Не призначена" }}</p>{% endif %}
+{% if teacher %}<p>Предмет: {{ teacher.subject }}</p>{% endif %}
+<h2>Розклад занять</h2>
+{% if schedules %}
+<table><tr><th>Дата і час</th><th>Група</th><th>Викладач</th><th>Місце</th></tr>
+{% for item in schedules %}
+<tr><td>{{ item.datetime|date:"d.m.Y H:i" }}</td><td>{{ item.group }}</td><td>{{ item.teacher }}</td><td>{{ item.location }}</td></tr>
+{% endfor %}</table>
+{% else %}<p>Розклад поки порожній.</p>{% endif %}
+<h2>Студенти</h2>
+<table><tr><th>Ім'я</th><th>Група</th></tr>
+{% for s in students %}<tr><td>{{ s.profile }}</td><td>{{ s.group|default:"—" }}</td></tr>{% empty %}<tr><td colspan="2">Студентів поки немає.</td></tr>{% endfor %}</table>
+<h2>Викладачі</h2>
+<table><tr><th>Ім'я</th><th>Предмет</th></tr>
+{% for t in teachers %}<tr><td>{{ t.profile }}</td><td>{{ t.subject }}</td></tr>{% empty %}<tr><td colspan="2">Викладачів поки немає.</td></tr>{% endfor %}</table>
+{% endblock %}
